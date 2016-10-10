@@ -10,8 +10,8 @@ feature "the signup process" do
 
   feature "signing up a user" do
     scenario "shows username on the homepage after signup" do
-      fill_in ('username', with: 'bob')
-      fill_in ('password', with: 'asdfasdf')
+      fill_in 'username', with: 'bob'
+      fill_in 'password', with: 'asdfasdf'
       click_on "Submit"
 
       expect(page).to have_content("bob")
@@ -22,15 +22,15 @@ end
 feature "logging in" do
   before do
     visit new_user_path
-    fill_in ('username', with: 'bob')
-    fill_in ('password', with: 'asdfasdf')
+    fill_in 'username', with: 'bob'
+    fill_in 'password', with: 'asdfasdf'
     click_on "Submit"
     click_on "Logout"
   end
   scenario "shows username on the homepage after login" do
     visit new_session_path
-    fill_in ('username', with: 'bob')
-    fill_in ('password', with: 'asdfasdf')
+    fill_in 'username', with: 'bob'
+    fill_in 'password', with: 'asdfasdf'
     click_on "Login"
 
     expect(page).to have_content("bob")
@@ -38,17 +38,19 @@ feature "logging in" do
 end
 
 feature "logging out" do
+  before(:each) do
+    visit new_user_path
+    fill_in 'username', with: 'bob'
+    fill_in 'password', with: 'asdfasdf'
+    click_on "Submit"
+    click_on "Logout"
+  end
+  
   scenario "begins with a logged out state" do
-    visit '/'
     expect(page).to have_content("Sign In")
   end
 
   scenario "doesn't show username on the homepage after logout" do
-    visit new_user_path
-    fill_in ('username', with: 'bob')
-    fill_in ('password', with: 'asdfasdf')
-    click_on "Submit"
-    click_on "Logout"
     expect(page).not_to have_content('bob')
   end
 

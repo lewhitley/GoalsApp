@@ -1,0 +1,5 @@
+<h2><%= @user.username %>'s Profile</h2>
+
+<% @user.goals.each do |goal| %>
+<%= goal.title %>
+<% end %>

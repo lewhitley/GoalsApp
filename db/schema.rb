@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(version: 20161010204751) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "goals", force: :cascade do |t|
-    t.boolean  "public",     null: false
     t.integer  "user_id",    null: false
     t.string   "title",      null: false
     t.text     "body",       null: false
+    t.boolean  "finished",   null: false
+    t.boolean  "blobby",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
